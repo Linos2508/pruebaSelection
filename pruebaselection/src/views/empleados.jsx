@@ -2,33 +2,34 @@ import React, { Component } from "react";
 import Navegacion from "../components/navegacion.jsx";
 import Griddle, { plugins, RowDefinition, ColumnDefinition} from 'griddle-react';
 import "../styles/empleados.css";
+import swal from "sweetalert";
 
 export default class Inicio extends Component {
     constructor() {
         super();
         this.state ={
-            empleados:[
-                {nombre:"edgar",email:"email",fecha:"07-07-1998",calle:"test 2",colonia:"test",estado:"test",skills:"a,b,c,d,e"},
-                {nombre:"edgar",email:"email",fecha:"07-07-1998",calle:"test 2",colonia:"test",estado:"test",skills:"a,b,c,d,e"},
-                {nombre:"edgar",email:"email",fecha:"07-07-1998",calle:"test 2",colonia:"test",estado:"test",skills:"a,b,c,d,e"},
-                {nombre:"edgar",email:"email",fecha:"07-07-1998",calle:"test 2",colonia:"test",estado:"test",skills:"a,b,c,d,e"},
-                {nombre:"edgar",email:"email",fecha:"07-07-1998",calle:"test 2",colonia:"test",estado:"test",skills:"a,b,c,d,e"},
-                {nombre:"edgar",email:"email",fecha:"07-07-1998",calle:"test 2",colonia:"test",estado:"test",skills:"a,b,c,d,e"},
-                {nombre:"edgar",email:"email",fecha:"07-07-1998",calle:"test 2",colonia:"test",estado:"test",skills:"a,b,c,d,e"},
-                {nombre:"edgar",email:"email",fecha:"07-07-1998",calle:"test 2",colonia:"test",estado:"test",skills:"a,b,c,d,e"},
-                {nombre:"edgar",email:"email",fecha:"07-07-1998",calle:"test 2",colonia:"test",estado:"test",skills:"a,b,c,d,e"},
-                {nombre:"edgar",email:"email",fecha:"07-07-1998",calle:"test 2",colonia:"test",estado:"test",skills:"a,b,c,d,e"},
-                {nombre:"edgar",email:"email",fecha:"07-07-1998",calle:"test 2",colonia:"test",estado:"test",skills:"a,b,c,d,e"},
-                {nombre:"edgar",email:"email",fecha:"07-07-1998",calle:"test 2",colonia:"test",estado:"test",skills:"a,b,c,d,e"},
-                {nombre:"edgar",email:"email",fecha:"07-07-1998",calle:"test 2",colonia:"test",estado:"test",skills:"a,b,c,d,e"},
-                {nombre:"edgar",email:"email",fecha:"07-07-1998",calle:"test 2",colonia:"test",estado:"test",skills:"a,b,c,d,e"},
-                {nombre:"edgar",email:"email",fecha:"07-07-1998",calle:"test 2",colonia:"test",estado:"test",skills:"a,b,c,d,e"},
-                {nombre:"edgar",email:"email",fecha:"07-07-1998",calle:"test 2",colonia:"test",estado:"test",skills:"a,b,c,d,e"},
-            ],
+            empleados:[],
         }
     }
     obtenerEmpleados = () => {}
-    componentDidMount(){}
+    componentDidMount(){
+        fetch("https://www.linos2508.com/api/getEmpleados.php",{
+            method: "GET"
+        }).then(res => res.json())
+        .then( result => {
+            if( result.result === 1){
+                this.setState({empleados: result.data});
+            }
+            else{
+                swal({
+                    title: "Ooops!",
+                    text: result.error,
+                    icon: "error",
+                    button: "ok"
+                });
+            }
+        })
+    }
     render(){
         const layoutTablas = ({ Table, Pagination, Filter }) => (
             <div className="tablaGriddle">

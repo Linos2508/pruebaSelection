@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import Navegacion from "../components/navegacion.jsx";
 import "../styles/formulario.css";
+import swal from 'sweetalert';
 
 export default class Inicio extends Component {
     constructor() {
@@ -10,7 +10,54 @@ export default class Inicio extends Component {
             skills:['','',''],
         }
     }
-    subirEmpleado = () => {}
+    subirEmpleado = e => {
+        e.preventDefault();
+        let data = {
+            nombre: document.getElementById("nombre").value,
+            email: document.getElementById("email").value,
+            fecha: document.getElementById("fechaNacimiento").value,
+            calle: document.getElementById("calleNumero").value,
+            colonia: document.getElementById("colonia").value,
+            estado: document.getElementById("estado").value,
+            skills: []
+        }
+        for (let i = 0; i < this.state.skills.length; i++) {
+            data.skills.push(document.getElementById("skill" + i).value);
+        }
+        fetch("https://www.linos2508.com/api/insertEmpleado.php",{
+            method:"POST",
+            body: JSON.stringify(data),
+            headers:{
+                "Content-Type":"application/json"
+            }
+        }).then(res => res.json())
+        .then(result => {
+            if (result.result === 1 && result.error === ""){
+                swal({
+                    title: "Insertado!",
+                    text: "El empleado y sus skills han sido insertados!",
+                    icon: "success",
+                    button: "ok"
+                });
+            }
+            else if(result.result === 1 && result.error === "Algunos skills no fueron insertados"){
+                swal({
+                    title: "Insertado!",
+                    text: "El empleado fue insertado pero algunos skills no han sido insertados :(",
+                    icon: "warning",
+                    button: "ok"
+                });
+            }
+            else {
+                swal({
+                    title: "Ooops!",
+                    text: result.error,
+                    icon: "error",
+                    button: "ok"
+                });
+            }
+        })
+    }
     renderSkills = () => {
         let renderIP = [];
         let ips = this.state.skills;
@@ -58,13 +105,13 @@ export default class Inicio extends Component {
                                 <label htmlFor="nombre">
                                 Nombre
                                 </label><br/>
-                                <input type="text" id="nombre" required/>
+                                <input type="text" id="nombre" maxLength={150} required/>
                             </div>
                             <div className="">
                                 <label htmlFor="email">
                                 Email
                                 </label><br/>
-                                <input type="email" id="email" required/>
+                                <input type="email" id="email" maxLength={60} required/>
                             </div>
                             <div className="">
                                 <label htmlFor="fechaNacimiento">
@@ -76,19 +123,19 @@ export default class Inicio extends Component {
                                 <label htmlFor="calleNumero">
                                 Calle y numero
                                 </label><br/>
-                                <input type="text" id="calleNumero" required/>
+                                <input type="text" id="calleNumero" maxLength={60} required/>
                             </div>
                             <div className="">
                                 <label htmlFor="colonia">
                                 Colonia
                                 </label><br/>
-                                <input type="text" id="colonia" required/>
+                                <input type="text" id="colonia" maxLength={60} required/>
                             </div>
                             <div className="">
                                 <label htmlFor="estado">
                                 Estado
                                 </label><br/>
-                                <input type="text" id="estado" required/>
+                                <input type="text" id="estado" maxLength={60} required/>
                             </div>
                             <div className="">
                                 <div>{this.renderSkills()}</div>
