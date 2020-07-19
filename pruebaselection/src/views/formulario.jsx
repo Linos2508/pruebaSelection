@@ -101,43 +101,43 @@ export default class Inicio extends Component {
                     <div className="contenedorFormulario">
                         <h2>Crear Empleado</h2>
                         <form onSubmit={e => this.subirEmpleado(e)} className="formulario">
-                            <div className="">
+                            <div>
                                 <label htmlFor="nombre">
                                 Nombre
                                 </label><br/>
                                 <input type="text" id="nombre" maxLength={150} required/>
                             </div>
-                            <div className="">
+                            <div>
                                 <label htmlFor="email">
                                 Email
                                 </label><br/>
                                 <input type="email" id="email" maxLength={60} required/>
                             </div>
-                            <div className="">
+                            <div>
                                 <label htmlFor="fechaNacimiento">
                                 Fecha de nacimiento
                                 </label><br/>
                                 <input type="date" id="fechaNacimiento" data-date-format="DD/MMMM/YYYY" required/>
                             </div>
-                            <div className="">
+                            <div>
                                 <label htmlFor="calleNumero">
                                 Calle y numero
                                 </label><br/>
                                 <input type="text" id="calleNumero" maxLength={60} required/>
                             </div>
-                            <div className="">
+                            <div>
                                 <label htmlFor="colonia">
                                 Colonia
                                 </label><br/>
                                 <input type="text" id="colonia" maxLength={60} required/>
                             </div>
-                            <div className="">
+                            <div>
                                 <label htmlFor="estado">
                                 Estado
                                 </label><br/>
                                 <input type="text" id="estado" maxLength={60} required/>
                             </div>
-                            <div className="">
+                            <div>
                                 <div>{this.renderSkills()}</div>
                                 <button
                                     type="button"
@@ -145,7 +145,7 @@ export default class Inicio extends Component {
                                     className="botonPrincipal"
                                 >Agregar Skill</button>
                             </div>
-                            <div className="Addtransaction">
+                            <div>
                                 <button type="submit" className="botonPrincipal">
                                 Guardar
                                 </button>
