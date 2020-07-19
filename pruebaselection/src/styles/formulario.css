@@ -1,0 +1,30 @@
+.contenedorGeneral{
+    background-color: rgba(0, 0, 0, .9);
+}
+.contenedorFormulario h2{
+    margin: 0 0 25px 0;
+    text-align: center;
+    color: white;
+}
+.formulario{
+    margin: 0 auto;
+    padding: 50px;
+    background-color: whitesmoke;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    max-width: 50%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 30px;
+}
+.formulario input{
+    min-width: 50%;
+    border-radius: 15px;
+    background-color: #f6f7f8;
+}
+.formulario .botonSkills{
+    border: none;
+    color: white;
+    border-radius: 35px;
+    background-color: red;
+}
